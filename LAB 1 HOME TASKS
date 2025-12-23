@@ -1,0 +1,171 @@
+Home Task 1 :
+public class Rectangle {
+    double width = 1;
+    double height = 1;
+
+    // No-arg constructor
+    public Rectangle() {
+    }
+
+    // Constructor with parameters
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getArea() {
+        return width * height;
+    }
+
+    public double getPerimeter() {
+        return 2 * (width + height);
+    }
+}
+
+TEST PROGRAM :
+
+public class TestRectangle {
+    public static void main(String[] args) {
+        Rectangle r1 = new Rectangle(4, 40);
+        Rectangle r2 = new Rectangle(3.5, 35.9);
+
+        display(r1);
+        display(r2);
+    }
+
+    public static void display(Rectangle r) {
+        System.out.println("Width: " + r.width);
+        System.out.println("Height: " + r.height);
+        System.out.println("Area: " + r.getArea());
+        System.out.println("Perimeter: " + r.getPerimeter());
+        System.out.println();
+    }
+}
+
+Task 2 :
+
+public class Stock {
+    String symbol;
+    String name;
+    double previousClosingPrice;
+    double currentPrice;
+
+    public Stock(String symbol, String name) {
+        this.symbol = symbol;
+        this.name = name;
+    }
+
+    public double getChangePercent() {
+        return ((currentPrice - previousClosingPrice)
+                / previousClosingPrice) * 100;
+    }
+}
+
+Test Program : 
+
+public class TestStock {
+    public static void main(String[] args) {
+        Stock stock = new Stock("ORCL", "Oracle Corporation");
+
+        stock.previousClosingPrice = 34.5;
+        stock.currentPrice = 34.35;
+
+        System.out.println("Price Change Percentage: "
+                + stock.getChangePercent() + "%");
+    }
+}
+
+Task 3 :
+
+import java.util.Date;
+
+public class UseDate {
+    public static void main(String[] args) {
+        long[] times = {
+            10000L, 100000L, 1000000L, 10000000L,
+            100000000L, 1000000000L,
+            10000000000L, 100000000000L
+        };
+
+        Date date = new Date();
+
+        for (long t : times) {
+            date.setTime(t);
+            System.out.println(date.toString());
+        }
+    }
+}
+
+Task 4 :
+
+import java.util.Random;
+
+public class UseRandom {
+    public static void main(String[] args) {
+        Random rand = new Random(1000);
+
+        for (int i = 1; i <= 50; i++) {
+            System.out.print(rand.nextInt(100) + " ");
+
+            if (i % 10 == 0)
+                System.out.println();
+        }
+    }
+}
+
+Task 5 : 
+
+public class Account {
+    private int id = 0;
+    private double balance = 0;
+    private static double annualInterestRate = 0;
+
+    public Account() {
+    }
+
+    public Account(int id, double balance) {
+        this.id = id;
+        this.balance = balance;
+    }
+
+    public double getMonthlyInterestRate() {
+        return annualInterestRate / 12;
+    }
+
+    public double getMonthlyInterest() {
+        return balance * getMonthlyInterestRate() / 100;
+    }
+
+    public void withdraw(double amount) {
+        balance -= amount;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    public static void setAnnualInterestRate(double rate) {
+        annualInterestRate = rate;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+Test Program : 
+
+public class TestAccount {
+    public static void main(String[] args) {
+        Account acc = new Account(1122, 20000);
+        Account.setAnnualInterestRate(4.5);
+
+        acc.withdraw(2500);
+        acc.deposit(3000);
+
+        System.out.println("Balance: " + acc.getBalance());
+        System.out.println("Monthly Interest: " + acc.getMonthlyInterest());
+    }
+}
+
+
