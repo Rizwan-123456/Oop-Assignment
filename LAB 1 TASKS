@@ -1,0 +1,132 @@
+Lab-1 Tasks:
+
+Task 1,2 :
+
+#include <iostream>
+using namespace std;
+
+class CounterClass {
+    static int count;
+
+public:
+    CounterClass() {
+        count++;
+        cout << "I am object no. " << count << endl;
+    }
+};
+
+int CounterClass::count = 0;
+
+int main() {
+    CounterClass obj1, obj2, obj3;
+    return 0;
+}
+
+Task 3 :
+
+
+#include <iostream>
+using namespace std;
+
+class Int {
+    int value;
+
+public:
+    Int() {          // initialize to zero
+        value = 0;
+    }
+
+    Int(int v) {     // initialize to integer value
+        value = v;
+    }
+
+    void display() {
+        cout << "Value: " << value << endl;
+    }
+};
+
+int main() {
+    Int a;       // initialized to zero
+    Int b(25);   // initialized to 25
+
+    a.display();
+    b.display();
+
+    return 0;
+}
+
+Task 4 :
+#include <iostream>
+using namespace std;
+
+class Time {
+    int hours, minutes, seconds;
+
+public:
+    void read() {
+        cout << "Enter hours minutes seconds: ";
+        cin >> hours >> minutes >> seconds;
+    }
+
+    void display24() {
+        cout << "24-Hour Format: "
+             << hours << ":" << minutes << ":" << seconds << endl;
+    }
+
+    void display12() {
+        int h = hours;
+        string period = "AM";
+
+        if (h >= 12) {
+            period = "PM";
+            if (h > 12)
+                h -= 12;
+        }
+        if (h == 0)
+            h = 12;
+
+        cout << "12-Hour Format: "
+             << h << ":" << minutes << ":" << seconds << " " << period << endl;
+    }
+};
+
+int main() {
+    Time t;
+    t.read();
+    t.display24();
+    t.display12();
+
+    return 0;
+}
+
+Task 5 :
+#include <iostream>
+using namespace std;
+
+class Marks {
+    int m1, m2, m3;
+
+public:
+    void set_marks() {
+        cout << "Enter three marks: ";
+        cin >> m1 >> m2 >> m3;
+    }
+
+    int sum() {
+        return m1 + m2 + m3;
+    }
+
+    float avg() {
+        return sum() / 3.0;
+    }
+};
+
+int main() {
+    Marks s;
+    s.set_marks();
+
+    cout << "Sum = " << s.sum() << endl;
+    cout << "Average = " << s.avg() << endl;
+
+    return 0;
+}
