@@ -1,0 +1,233 @@
+TASK 1 : 
+
+#include <iostream>
+using namespace std;
+
+class Student {
+protected:
+    int rollno;
+    string name, className;
+
+public:
+    void getdata() {
+        cout << "Enter Roll No, Name, Class: ";
+        cin >> rollno >> name >> className;
+    }
+
+    void putdata() {
+        cout << "Roll No: " << rollno << endl;
+        cout << "Name: " << name << endl;
+        cout << "Class: " << className << endl;
+    }
+};
+
+class Test : public Student {
+private:
+    float T1marks, T2marks, T3marks;
+    float Sessional1, Sessional2, Assignment;
+    float Final;
+
+public:
+    void getmarks() {
+        cout << "Enter T1, T2, T3 marks: ";
+        cin >> T1marks >> T2marks >> T3marks;
+
+        cout << "Enter Sessional1, Sessional2, Assignment: ";
+        cin >> Sessional1 >> Sessional2 >> Assignment;
+    }
+
+    void Finalresult() {
+        Final = (T1marks + T2marks + T3marks +
+                 Sessional1 + Sessional2 + Assignment) / 6;
+    }
+
+    void putmarks() {
+        putdata();
+        cout << "Final Result: " << Final << endl;
+    }
+};
+
+int main() {
+    Test t;
+    t.getdata();
+    t.getmarks();
+    t.Finalresult();
+    t.putmarks();
+    return 0;
+}
+
+TASK 2 :
+
+#include <iostream>
+using namespace std;
+
+class Simple {
+protected:
+    int num1, num2;
+
+public:
+    Simple(int a, int b) {
+        num1 = a;
+        num2 = b;
+    }
+
+    void add() { cout << "Add: " << num1 + num2 << endl; }
+    void sub() { cout << "Sub: " << num1 - num2 << endl; }
+    void mul() { cout << "Mul: " << num1 * num2 << endl; }
+    void div() {
+        if (num2 != 0)
+            cout << "Div: " << num1 / num2 << endl;
+        else
+            cout << "Division by zero\n";
+    }
+};
+
+class Complex : public Simple {
+public:
+    Complex(int a, int b) : Simple(a, b) {}
+
+    void add() {
+        if (num1 > 0 && num2 > 0)
+            Simple::add();
+        else
+            cout << "Error: Values must be > 0\n";
+    }
+
+    void sub() {
+        if (num1 > 0 && num2 > 0)
+            Simple::sub();
+        else
+            cout << "Error: Values must be > 0\n";
+    }
+
+    void mul() {
+        if (num1 > 0 && num2 > 0)
+            Simple::mul();
+        else
+            cout << "Error: Values must be > 0\n";
+    }
+
+    void div() {
+        if (num1 > 0 && num2 > 0)
+            Simple::div();
+        else
+            cout << "Error: Values must be > 0\n";
+    }
+};
+
+int main() {
+    Complex c(10, 5);
+    c.add();
+    c.sub();
+    c.mul();
+    c.div();
+    return 0;
+}
+
+
+Task 3 : 
+
+#include <iostream>
+using namespace std;
+
+class Electricity {
+protected:
+    int units;
+
+public:
+    Electricity(int u) {
+        units = u;
+    }
+
+    virtual float Bill() {
+        float cost;
+        if (units <= 100)
+            cost = units * 0.50;
+        else
+            cost = 100 * 0.50 + (units - 100) * 0.60;
+        return cost;
+    }
+};
+
+class More_Electricity : public Electricity {
+public:
+    More_Electricity(int u) : Electricity(u) {}
+
+    float Bill() {
+        float cost = Electricity::Bill();
+        if (cost > 250)
+            cost += (cost - 250) * 0.15;
+        return cost;
+    }
+};
+
+int main() {
+    More_Electricity e(600);
+    cout << "Total Bill: Rs. " << e.Bill() << endl;
+    return 0;
+}
+
+Task 4 : 
+
+#include <iostream>
+using namespace std;
+
+class Package {
+protected:
+    string senderName, receiverName;
+    double weight, costPerOunce;
+
+public:
+    Package(string s, string r, double w, double c) {
+        senderName = s;
+        receiverName = r;
+        weight = (w > 0) ? w : 0;
+        costPerOunce = (c > 0) ? c : 0;
+    }
+
+    virtual double calculateCost() {
+        return weight * costPerOunce;
+    }
+};
+
+class TwoDayPackage : public Package {
+private:
+    double flatFee;
+
+public:
+    TwoDayPackage(string s, string r, double w, double c, double f)
+        : Package(s, r, w, c) {
+        flatFee = f;
+    }
+
+    double calculateCost() {
+        return Package::calculateCost() + flatFee;
+    }
+};
+
+class OvernightPackage : public Package {
+private:
+    double extraFee;
+
+public:
+    OvernightPackage(string s, string r, double w, double c, double e)
+        : Package(s, r, w, c) {
+        extraFee = e;
+    }
+
+    double calculateCost() {
+        return weight * (costPerOunce + extraFee);
+    }
+};
+
+int main() {
+    Package p("Ali", "Ahmed", 10, 5);
+    TwoDayPackage t("Ali", "Ahmed", 10, 5, 20);
+    OvernightPackage o("Ali", "Ahmed", 10, 5, 3);
+
+    cout << "Normal Package Cost: " << p.calculateCost() << endl;
+    cout << "Two Day Package Cost: " << t.calculateCost() << endl;
+    cout << "Overnight Package Cost: " << o.calculateCost() << endl;
+
+    return 0;
+}
